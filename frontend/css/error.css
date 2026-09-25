@@ -1,0 +1,72 @@
+/* Thiết lập hiển thị toàn màn hình và căn giữa nội dung */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Hộp chứa thông báo lỗi (Responsive) */
+.error-container {
+    text-align: center;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%; /* Giúp hiển thị tốt trên cả điện thoại */
+}
+
+/* Số lỗi 403 */
+.error-code {
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Màu cảnh báo cho lỗi 403 */
+.warning { 
+    color: #f39c12; 
+}
+
+/* Tiêu đề lỗi */
+.error-title {
+    font-size: 24px;
+    color: #333333;
+    margin: 15px 0 10px;
+}
+
+/* Mô tả chi tiết */
+.error-description {
+    color: #666666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Định dạng chung cho nút bấm */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* Nút quay lại trang chủ */
+.btn-primary {
+    background-color: #0d6efd; /* Màu xanh chuẩn Bootstrap đồng bộ với các hệ thống phổ biến */
+    color: #ffffff;
+}

@@ -3,25 +3,24 @@ const MENU_ITEMS = [
   {
     title: "Trang chủ",
     url: "/home",
-    icon: "🏠",
     roles: ["USER", "ADMIN"]
   },
   {
     title: "Thông tin cá nhân",
     url: "/profile",
-    icon: "👤",
+
     roles: ["USER", "ADMIN"]
   },
   {
     title: "Quản lý người dùng",
     url: "/admin/users",
-    icon: "👥",
+
     roles: ["ADMIN"]
   },
   {
     title: "Quản lý tài khoản",
     url: "/admin/accounts",
-    icon: "💳",
+  
     roles: ["ADMIN"]
   }
 ];

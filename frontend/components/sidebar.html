@@ -4,40 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sidebar Menu - S1-06</title>
-  <!-- Liên kết file CSS: lùi 1 cấp ra frontend rồi vào css -->
   <link rel="stylesheet" href="../css/dashboard.css" />
 </head>
 <body>
 
-  <!-- Nút bấm Toggle mở sidebar trên Mobile -->
+
   <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
 
-  <!-- Sidebar Component -->
+  
   <aside id="app-sidebar" class="sidebar">
     <div class="sidebar-header">
       <div class="brand-logo">Hệ Thống Quản Lý</div>
       <button id="sidebar-close" class="sidebar-close" aria-label="Close menu">&times;</button>
     </div>
 
-    <!-- Hiển thị vai trò hiện tại -->
+  
     <div class="user-profile-badge">
       <span class="user-role-label">Vai trò: <strong id="current-role-display">USER</strong></span>
     </div>
 
-    <!-- Danh sách Menu chính (được render động bằng JS) -->
+  
     <nav class="sidebar-nav">
       <ul id="menu-list" class="menu-list"></ul>
     </nav>
   </aside>
 
-  <!-- Lớp phủ màn hình khi bật menu trên Mobile -->
+  
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-  <!-- Nội dung trang test thử nghiệm chức năng -->
+  
   <main class="main-content">
     <header class="content-header">
       <h1>Nhiệm vụ S1-06: Menu theo quyền người dùng</h1>
@@ -57,7 +56,7 @@
     </section>
   </main>
 
-  <!-- Liên kết file JS: lùi 1 cấp ra frontend rồi vào js -->
+
   <script src="../js/menu.js"></script>
 </body>
 </html>

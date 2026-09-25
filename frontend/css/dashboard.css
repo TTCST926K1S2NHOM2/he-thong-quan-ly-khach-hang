@@ -20,7 +20,7 @@ body {
   color: #1e293b;
 }
 
-/* Nút Toggle mở menu trên điện thoại */
+
 .sidebar-toggle {
   display: none;
   flex-direction: column;
@@ -46,7 +46,7 @@ body {
   border-radius: 2px;
 }
 
-/* Sidebar cơ bản */
+
 .sidebar {
   width: var(--sidebar-width);
   height: 100vh;
@@ -91,7 +91,7 @@ body {
   color: var(--text-white);
 }
 
-/* Khối hiển thị Role */
+
 .user-profile-badge {
   padding: 14px 20px;
   font-size: 0.85rem;
@@ -105,7 +105,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Danh mục Menu */
+
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
@@ -146,7 +146,7 @@ body {
   font-size: 1.1rem;
 }
 
-/* Lớp phủ màn hình Mobile */
+
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -156,7 +156,7 @@ body {
   z-index: 90;
 }
 
-/* Khu vực nội dung kiểm thử */
+
 .main-content {
   margin-left: var(--sidebar-width);
   padding: 32px;
@@ -225,7 +225,7 @@ body {
   line-height: 1.6;
 }
 
-/* Responsive Mobile & Tablet (< 768px) */
+
 @media (max-width: 768px) {
   .sidebar-toggle {
     display: flex;

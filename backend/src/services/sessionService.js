@@ -3,19 +3,35 @@ const Session = require('../models/Session');
 class SessionService {
   // Tạo session mới
   async createSession(userId, token, expiresAt, deviceInfo = '') {
-    if (!userId || !token || !expiresAt) {
-      throw new Error('userId, token và expiresAt là bắt buộc');
+    if (!userId) {
+      throw new Error('userId là bắt buộc');
     }
 
-    const session = await Session.create({
+    if (!token) {
+      throw new Error('token là bắt buộc');
+    }
+
+    if (!expiresAt) {
+      throw new Error('expiresAt là bắt buộc');
+    }
+
+    const expiryDate = new Date(expiresAt);
+
+    if (Number.isNaN(expiryDate.getTime())) {
+      throw new Error('expiresAt không hợp lệ');
+    }
+
+    if (expiryDate <= new Date()) {
+      throw new Error('expiresAt phải là thời điểm trong tương lai');
+    }
+
+    return await Session.create({
       userId,
       token,
-      expiresAt,
+      expiresAt: expiryDate,
       deviceInfo,
       isValid: true,
     });
-
-    return session;
   }
 
   // Kiểm tra session còn hiệu lực
@@ -56,10 +72,10 @@ class SessionService {
     };
   }
 
-  // Hủy session khi đăng xuất
+  // Hủy session khi logout
   async destroySession(token) {
     if (!token) {
-      return false;
+      throw new Error('Token là bắt buộc');
     }
 
     const session = await Session.findOne({
@@ -70,21 +86,29 @@ class SessionService {
       return false;
     }
 
+    // Không xóa ngay, chỉ đánh dấu session không còn hiệu lực
     session.isValid = false;
     await session.save();
 
     return true;
   }
 
-  // Hủy tất cả session của User
+  // Hủy tất cả session của một User
   async destroyAllUserSessions(userId) {
     if (!userId) {
       throw new Error('userId là bắt buộc');
     }
 
     const result = await Session.updateMany(
-      { userId, isValid: true },
-      { $set: { isValid: false } }
+      {
+        userId,
+        isValid: true,
+      },
+      {
+        $set: {
+          isValid: false,
+        },
+      }
     );
 
     return result.modifiedCount;

@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status.active {
+    background-color: #e2f0d9;
+    color: #385723;
+}
+
+.status.locked {
+    background-color: #fce4d6;
+    color: #c65911;
+}
+
+.btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-lock {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-lock:hover {
+    background-color: #c82333;
+}
+
+.btn-unlock {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-unlock:hover {
+    background-color: #218838;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

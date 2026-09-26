@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khóa/Mở khóa tài khoản</title>
+    <link rel="stylesheet" href="../../css/users.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Danh sách tài khoản</h2>
+        
+        <!-- Thông báo kết quả -->
+        <div id="alert-message" class="alert hidden"></div>
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Tên tài khoản</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="user-table-body">
+                <!-- Dữ liệu được lấy và render tự động từ API Backend -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../../js/users.js"></script>
+</body>
+</html>

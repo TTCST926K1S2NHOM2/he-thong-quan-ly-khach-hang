@@ -79,7 +79,7 @@ const updateUser = async (id, updateData) => {
   const updatedUser = await User.findByIdAndUpdate(id, updateData, {
     new: true,
     runValidators: true,
-  }).select('-password');
+  }).select('-password -resetPasswordToken -resetPasswordExpires');
 
   if (!updatedUser) {
     throw new Error('Không tìm thấy người dùng để cập nhật');

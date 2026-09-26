@@ -3,60 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Sidebar Menu - S1-06</title>
+
   <link rel="stylesheet" href="../css/dashboard.css" />
 </head>
+
 <body>
 
-
-  <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle menu">
+  <!-- Nút mở Sidebar trên mobile -->
+  <button
+    id="sidebar-toggle"
+    class="sidebar-toggle"
+    aria-label="Toggle menu"
+  >
     <span></span>
     <span></span>
     <span></span>
   </button>
 
-  
+
+  <!-- Sidebar -->
   <aside id="app-sidebar" class="sidebar">
+
+    <!-- Header Sidebar -->
     <div class="sidebar-header">
-      <div class="brand-logo">Hệ Thống Quản Lý</div>
-      <button id="sidebar-close" class="sidebar-close" aria-label="Close menu">&times;</button>
+
+      <div class="brand-logo">
+        Hệ Thống Quản Lý
+      </div>
+
+      <button
+        id="sidebar-close"
+        class="sidebar-close"
+        aria-label="Close menu"
+      >
+        &times;
+      </button>
+
     </div>
 
-  
+
+    <!-- Thông tin người dùng -->
     <div class="user-profile-badge">
-      <span class="user-role-label">Vai trò: <strong id="current-role-display">USER</strong></span>
+
+      <span class="user-role-label">
+        Vai trò:
+        <strong id="current-role-display">USER</strong>
+      </span>
+
+      <!-- Nút đăng xuất -->
+      <button
+        id="btn-logout"
+        class="btn-logout"
+        type="button"
+      >
+        Đăng xuất
+      </button>
+
     </div>
 
-  
+
+    <!-- Menu -->
     <nav class="sidebar-nav">
-      <ul id="menu-list" class="menu-list"></ul>
+
+      <ul
+        id="menu-list"
+        class="menu-list"
+      ></ul>
+
     </nav>
+
   </aside>
 
-  
-  <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-  
+  <!-- Overlay trên mobile -->
+  <div
+    id="sidebar-overlay"
+    class="sidebar-overlay"
+  ></div>
+
+
+  <!-- Nội dung chính -->
   <main class="main-content">
+
     <header class="content-header">
-      <h1>Menu theo quyền người dùng</h1>
-      <p>Frontend tự động kiểm tra vai trò người dùng để hiển thị menu tương ứng.</p>
+
+      <h1>
+        Menu theo quyền người dùng
+      </h1>
+
+      <p>
+        Frontend tự động kiểm tra vai trò người dùng
+        để hiển thị menu tương ứng.
+      </p>
+
     </header>
 
+
+    <!-- Khu vực kiểm tra phân quyền -->
     <section class="demo-box">
-      <h3>Kiểm tra phân quyền hiển thị Menu:</h3>
+
+      <h3>
+        Kiểm tra phân quyền hiển thị Menu:
+      </h3>
+
+
       <div class="button-group">
-        <button id="btn-set-admin" class="btn btn-admin">Đổi vai trò thành ADMIN</button>
-        <button id="btn-set-user" class="btn btn-user">Đổi vai trò thành USER</button>
+
+        <button
+          id="btn-set-admin"
+          class="btn btn-admin"
+          type="button"
+        >
+          Đổi vai trò thành ADMIN
+        </button>
+
+
+        <button
+          id="btn-set-user"
+          class="btn btn-user"
+          type="button"
+        >
+          Đổi vai trò thành USER
+        </button>
+
       </div>
+
+
+      <!-- Ghi chú -->
       <div class="note-box">
-        <p><strong>Admin:</strong> Xem được <em>Trang chủ, Thông tin cá nhân, Quản lý người dùng, Quản lý tài khoản</em>.</p>
-        <p><strong>User:</strong> Chỉ xem được <em>Trang chủ, Thông tin cá nhân</em>.</p>
+
+        <p>
+          <strong>Admin:</strong>
+          Xem được
+          <em>
+            Trang chủ, Thông tin cá nhân,
+            Quản lý người dùng, Quản lý tài khoản
+          </em>.
+        </p>
+
+        <p>
+          <strong>User:</strong>
+          Chỉ xem được
+          <em>
+            Trang chủ, Thông tin cá nhân
+          </em>.
+        </p>
+
       </div>
+
     </section>
+
   </main>
 
 
-  <script src="../js/menu.js"></script>
+  <!-- JavaScript -->
+ <script src="../js/menu.js?v=2"></script>
+
 </body>
 </html>

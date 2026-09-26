@@ -6,6 +6,7 @@ const sessionRoutes = require('./routes/sessionRoutes');
 const userRoutes = require('./routes/userRoutes');
 const passwordRoutes = require('./routes/passwordRoutes');
 const roleRoutes = require('./routes/roleRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/api/sessions', sessionRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/password', passwordRoutes);
 app.use('/api/roles', roleRoutes);
+app.use('/api/auth', authRoutes);
 
 // Test server
 app.get('/', (req, res) => {

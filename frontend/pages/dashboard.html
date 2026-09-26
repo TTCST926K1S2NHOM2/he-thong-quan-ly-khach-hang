@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trang chủ - Quản Lý Khách Hàng</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .header {
+            height: 60px;
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #dc3545;
+            color: white;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            Quản Lý Khách Hàng
+        </div>
+
+        <div class="user-info">
+            <span id="userName">Người dùng</span>
+            <span id="userRole">-</span>
+            <button id="logoutBtn" class="logout-btn">
+                Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>Trang chủ</h1>
+
+            <p>
+                Chào mừng bạn đến với hệ thống quản lý khách hàng.
+            </p>
+
+            <p id="welcomeUser"></p>
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Khách hàng</h3>
+                <p>Quản lý thông tin khách hàng.</p>
+            </div>
+
+            <div class="card">
+                <h3>Tài khoản</h3>
+                <p>Quản lý tài khoản người dùng.</p>
+            </div>
+
+            <div class="card">
+                <h3>Phân quyền</h3>
+                <p>Quản lý vai trò và nhóm nghiệp vụ.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // Lấy thông tin người dùng sau khi đăng nhập
+        const currentUser = localStorage.getItem("currentUser");
+
+        if (!currentUser) {
+            window.location.href = "../index.html";
+        } else {
+            const user = JSON.parse(currentUser);
+
+            document.getElementById("userName").textContent =
+                user.fullName || user.email;
+
+            document.getElementById("userRole").textContent =
+                user.role || "";
+
+            document.getElementById("welcomeUser").textContent =
+                "Xin chào " + (user.fullName || user.email) + "!";
+        }
+
+        // Đăng xuất
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            try {
+                await fetch("http://localhost:8080/api/sessions/logout", {
+                    method: "POST",
+                    credentials: "include"
+                });
+            } catch (error) {
+                console.error("Logout error:", error);
+            }
+
+            localStorage.removeItem("currentUser");
+
+            window.location.href = "../index.html";
+        });
+    </script>
+
+</body>
+</html>

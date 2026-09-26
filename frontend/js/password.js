@@ -1,71 +1,174 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('changePasswordForm');
-    const alertMessage = document.getElementById('alertMessage');
-    const toggleButtons = document.querySelectorAll('.toggle-password');
+document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Chức năng Bật/Tắt Hiện/Ẩn mật khẩu
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetId = button.getAttribute('data-target');
-            const input = document.getElementById(targetId);
+    const form = document.getElementById("forgotPasswordForm");
 
-            if (input.type === 'password') {
-                input.type = 'text';
-                button.style.color = '#2563eb';
-            } else {
-                input.type = 'password';
-                button.style.color = '#64748b';
+    const emailInput = document.getElementById("email");
+
+    const message =
+        document.getElementById("message") ||
+        document.getElementById("alertMessage");
+
+    if (!form) {
+        console.error(
+            "Không tìm thấy forgotPasswordForm."
+        );
+        return;
+    }
+
+
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+            emailInput?.value.trim();
+
+
+        // ===============================
+        // KIỂM TRA EMAIL
+        // ===============================
+        if (!email) {
+
+            showMessage(
+                "Vui lòng nhập email.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        // ===============================
+        // GỌI API QUÊN MẬT KHẨU
+        // ===============================
+        const button =
+            form.querySelector(
+                'button[type="submit"]'
+            );
+
+
+        if (button) {
+
+            button.disabled = true;
+
+            button.textContent =
+                "Đang xử lý...";
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://localhost:8080/api/password/forgot",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email
+                        })
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "Forgot password response:",
+                result
+            );
+
+
+            if (
+                !response.ok ||
+                !result.success
+            ) {
+
+                showMessage(
+                    result.message ||
+                    "Không thể gửi yêu cầu đặt lại mật khẩu.",
+                    "error"
+                );
+
+                return;
             }
-        });
+
+
+            // ===============================
+            // THÀNH CÔNG
+            // ===============================
+            showMessage(
+                result.message ||
+                "Yêu cầu đặt lại mật khẩu đã được tạo.",
+                "success"
+            );
+
+
+            form.reset();
+
+
+            // Nếu Backend trả token để test
+            if (
+                result.data &&
+                result.data.token
+            ) {
+
+                console.log(
+                    "Reset token:",
+                    result.data.token
+                );
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Forgot password error:",
+                error
+            );
+
+
+            showMessage(
+                "Không thể kết nối đến máy chủ.",
+                "error"
+            );
+
+
+        } finally {
+
+            if (button) {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Gửi yêu cầu";
+            }
+        }
+
     });
 
-    // 2. Xử lý submit & validation
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
 
-        const currentPassword = document.getElementById('currentPassword').value.trim();
-        const newPassword = document.getElementById('newPassword').value.trim();
-        const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    // ===============================
+    // HIỂN THỊ THÔNG BÁO
+    // ===============================
+    function showMessage(text, type) {
 
-        hideAlert();
-
-        // Kiểm tra mật khẩu hiện tại
-        if (!currentPassword) {
-            showAlert('Vui lòng nhập mật khẩu hiện tại.', 'error');
+        if (!message) {
             return;
         }
 
-        // Kiểm tra định dạng mật khẩu mới (Tối thiểu 8 ký tự, có ít nhất 1 chữ và 1 số)
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
-        if (!passwordRegex.test(newPassword)) {
-            showAlert('Mật khẩu mới phải từ 8 ký tự trở lên, bao gồm ít nhất một chữ cái và một chữ số.', 'error');
-            return;
-        }
+        message.textContent = text;
 
-        // Kiểm tra mật khẩu mới không trùng mật khẩu cũ
-        if (currentPassword === newPassword) {
-            showAlert('Mật khẩu mới không được giống với mật khẩu hiện tại.', 'error');
-            return;
-        }
-
-        // Kiểm tra khớp mật khẩu xác nhận
-        if (newPassword !== confirmPassword) {
-            showAlert('Mật khẩu xác nhận không trùng khớp.', 'error');
-            return;
-        }
-
-        // Mô phỏng thành công
-        showAlert('Đổi mật khẩu thành công! Các phiên đăng nhập khác đã được thu hồi.', 'success');
-        form.reset();
-    });
-
-    function showAlert(message, type) {
-        alertMessage.textContent = message;
-        alertMessage.className = `alert-message ${type}`;
+        message.className =
+            `alert-message ${type}`;
     }
 
-    function hideAlert() {
-        alertMessage.textContent = '';
-        alertMessage.className = 'alert-message';
-    }
 });

@@ -1,0 +1,33 @@
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
+const sessionRoutes = require('./routes/sessionRoutes');
+const userRoutes = require('./routes/userRoutes');
+const passwordRoutes = require('./routes/passwordRoutes');
+
+const app = express();
+
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// API routes
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/password', passwordRoutes);
+
+// Test server
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend đang hoạt động',
+  });
+});
+
+module.exports = app;

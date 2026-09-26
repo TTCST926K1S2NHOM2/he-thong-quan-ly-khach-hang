@@ -1,5 +1,6 @@
 const roleService = require("../services/roleService");
 
+// 1. Lấy danh sách Role
 const getRoles = async (req, res) => {
   try {
     const roles = await roleService.getRoles();
@@ -17,6 +18,7 @@ const getRoles = async (req, res) => {
   }
 };
 
+// 2. Lấy danh sách nhóm nghiệp vụ
 const getBusinessGroups = async (req, res) => {
   try {
     const groups = await roleService.getBusinessGroups();
@@ -34,44 +36,25 @@ const getBusinessGroups = async (req, res) => {
   }
 };
 
-const validateAssignment = async (req, res) => {
+// 3. Gán Role / nhóm nghiệp vụ cho User
+const assignRoleAndBusinessGroup = async (req, res) => {
   try {
-    const { userId, roleId, businessGroupId } = req.body;
+    const {
+      userId,
+      roleId,
+      businessGroupId,
+    } = req.body;
 
-    roleService.validateAssignment(
+    const result = await roleService.assignRoleAndBusinessGroup(
       userId,
       roleId,
       businessGroupId
     );
 
-    if (roleId) {
-      const role = await roleService.getRoleById(roleId);
-
-      if (!role) {
-        return res.status(404).json({
-          success: false,
-          message: "Role không tồn tại",
-        });
-      }
-    }
-
-    if (businessGroupId) {
-      const group =
-        await roleService.getBusinessGroupById(
-          businessGroupId
-        );
-
-      if (!group) {
-        return res.status(404).json({
-          success: false,
-          message: "Nhóm nghiệp vụ không tồn tại",
-        });
-      }
-    }
-
     return res.status(200).json({
       success: true,
-      message: "Dữ liệu hợp lệ",
+      message: "Gán Role / nhóm nghiệp vụ thành công",
+      data: result,
     });
   } catch (error) {
     return res.status(400).json({
@@ -84,5 +67,5 @@ const validateAssignment = async (req, res) => {
 module.exports = {
   getRoles,
   getBusinessGroups,
-  validateAssignment,
+  assignRoleAndBusinessGroup,
 };

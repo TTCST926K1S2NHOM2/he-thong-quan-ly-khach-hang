@@ -5,7 +5,10 @@ const router = express.Router();
 const roleController = require("../controllers/roleController");
 
 // Lấy danh sách Role
-router.get("/roles", roleController.getRoles);
+router.get(
+  "/roles",
+  roleController.getRoles
+);
 
 // Lấy danh sách nhóm nghiệp vụ
 router.get(
@@ -13,10 +16,10 @@ router.get(
   roleController.getBusinessGroups
 );
 
-// Kiểm tra dữ liệu gán Role / nhóm nghiệp vụ
+// Gán Role / nhóm nghiệp vụ cho User
 router.post(
-  "/validate-assignment",
-  roleController.validateAssignment
+  "/assign",
+  roleController.assignRoleAndBusinessGroup
 );
 
 module.exports = router;

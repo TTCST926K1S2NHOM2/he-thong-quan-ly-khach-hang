@@ -1,6 +1,6 @@
 const roleService = require("../services/roleService");
 
-// 1. Lấy danh sách Role
+// Lấy danh sách Role
 const getRoles = async (req, res) => {
   try {
     const roles = await roleService.getRoles();
@@ -18,7 +18,7 @@ const getRoles = async (req, res) => {
   }
 };
 
-// 2. Lấy danh sách nhóm nghiệp vụ
+// Lấy danh sách nhóm nghiệp vụ
 const getBusinessGroups = async (req, res) => {
   try {
     const groups = await roleService.getBusinessGroups();
@@ -36,7 +36,7 @@ const getBusinessGroups = async (req, res) => {
   }
 };
 
-// 3. Gán Role / nhóm nghiệp vụ cho User
+// Gán Role / nhóm nghiệp vụ cho User
 const assignRoleAndBusinessGroup = async (req, res) => {
   try {
     const {

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tableBody = document.getElementById('user-table-body');
     const alertBox = document.getElementById('alert-message');
 
-    // Endpoint theo thông tin của Huy cung cấp
+    // Endpoint theo đúng API thực tế từ Backend của Huy
     const API_BASE_URL = 'http://localhost:8080/api/users';
 
     function showAlert(message, type = 'success') {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 
-    // 1. Gọi API lấy danh sách tài khoản thật
+    // 1. Gọi API lấy danh sách tài khoản thật từ Backend
     async function fetchUsers() {
         try {
             const response = await fetch(API_BASE_URL);
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
             
             const result = await response.json();
             
-            // Xử lý theo cấu trúc JSON: result.data.users
+            // Lấy mảng users từ cấu trúc response.data.users
             const users = result.data && result.data.users ? result.data.users : [];
             renderUsers(users);
         } catch (error) {
             console.error('Lỗi fetchUsers:', error);
             showAlert('Lỗi khi tải danh sách tài khoản từ hệ thống!', 'error');
-            tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: red;">Không thể tải dữ liệu từ Backend</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: red;">Không thể kết nối lấy dữ liệu từ Backend</td></tr>`;
         }
     }
 
@@ -41,14 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         users.forEach(user => {
-            // Theo Huy: status nhận giá trị 'active', 'locked', hoặc 'inactive'
             const isLocked = user.status === 'locked'; 
             const statusText = isLocked ? 'Đã khóa' : 'Đang hoạt động';
             const statusClass = isLocked ? 'status locked' : 'status active';
 
             const tr = document.createElement('tr');
-            // Dùng _id chuẩn MongoDB theo thông tin backend
-            tr.setAttribute('data-id', user._id); 
+            tr.setAttribute('data-id', user._id); // Dùng _id chuẩn MongoDB
 
             tr.innerHTML = `
                 <td class="username">${user.fullName || 'Không có tên'}</td>
@@ -89,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         throw new Error(`Backend trả về lỗi mã ${response.status}`);
                     }
 
-                    // CHỈ KHI API THÀNH CÔNG MỚI ĐỔI GIAO DIỆN
+                    // CHỈ KHI API THÀNH CÔNG MỚI ĐỔI TRẠNG THÁI TRÊN GIAO DIỆN
                     const statusSpan = row.querySelector('.status');
                     if (isLocking) {
                         statusSpan.textContent = 'Đã khóa';
@@ -106,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                 } catch (error) {
-                    // NẾU API LỖI: Giữ nguyên trạng thái cũ, không đổi giao diện và báo lỗi
+                    // NẾU API LỖI: Giữ nguyên trạng thái cũ, KHÔNG ĐỔI GIAO DIỆN và báo lỗi
                     console.error(`Lỗi khi ${actionText} tài khoản:`, error);
                     showAlert(`Thất bại! Không thể ${actionText} tài khoản ${username}.`, 'error');
                 }

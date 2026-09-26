@@ -38,7 +38,7 @@ const getUsers = async (query) => {
 
 // Lấy thông tin chi tiết 1 người dùng
 const getUserById = async (id) => {
-  const user = await User.findById(id).select('-password');
+  const user = await User.findById(id).select('-password -resetPasswordToken -resetPasswordExpires');
   if (!user) {
     throw new Error('Không tìm thấy người dùng');
   }

@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
       enum: ['admin', 'staff', 'user'],
       default: 'staff',
     },
+    businessGroupId: {
+  type: Number,
+  default: null,
+},
     status: {
       type: String,
       enum: ['active', 'inactive'],

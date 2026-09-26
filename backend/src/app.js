@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const sessionRoutes = require('./routes/sessionRoutes');
 const userRoutes = require('./routes/userRoutes');
 const passwordRoutes = require('./routes/passwordRoutes');
+const roleRoutes = require('./routes/roleRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/password', passwordRoutes);
+app.use('/api/roles', roleRoutes);
 
 // Test server
 app.get('/', (req, res) => {

@@ -5,21 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Sidebar Menu - S1-06</title>
+  <title>Hệ Thống Quản Lý Khách Hàng</title>
 
   <link rel="stylesheet" href="../css/dashboard.css" />
 </head>
 
 <body>
 
-  <!-- ============================= -->
   <!-- NÚT MỞ SIDEBAR MOBILE -->
-  <!-- ============================= -->
-
   <button
     id="sidebar-toggle"
     class="sidebar-toggle"
-    aria-label="Toggle menu"
+    aria-label="Mở menu"
     type="button"
   >
     <span></span>
@@ -28,10 +25,7 @@
   </button>
 
 
-  <!-- ============================= -->
   <!-- SIDEBAR -->
-  <!-- ============================= -->
-
   <aside id="app-sidebar" class="sidebar">
 
     <!-- HEADER -->
@@ -44,7 +38,7 @@
       <button
         id="sidebar-close"
         class="sidebar-close"
-        aria-label="Close menu"
+        aria-label="Đóng menu"
         type="button"
       >
         &times;
@@ -53,18 +47,31 @@
     </div>
 
 
-    <!-- ============================= -->
     <!-- THÔNG TIN NGƯỜI DÙNG -->
-    <!-- ============================= -->
-
     <div class="user-profile-badge">
 
-      <span class="user-role-label">
-        Vai trò:
-        <strong id="current-role-display">USER</strong>
-      </span>
+      <div class="user-role-info">
+        <span class="user-role-label">
+          Vai trò:
+          <strong id="current-role-display">USER</strong>
+        </span>
+      </div>
 
-      <!-- NÚT ĐĂNG XUẤT -->
+    </div>
+
+
+    <!-- MENU THEO QUYỀN -->
+    <nav class="sidebar-nav">
+      <ul
+        id="menu-list"
+        class="menu-list"
+      ></ul>
+    </nav>
+
+
+    <!-- ĐĂNG XUẤT -->
+    <div class="sidebar-footer">
+
       <button
         id="btn-logout"
         class="btn-logout"
@@ -75,108 +82,85 @@
 
     </div>
 
-
-    <!-- ============================= -->
-    <!-- MENU -->
-    <!-- ============================= -->
-
-    <nav class="sidebar-nav">
-
-      <ul
-        id="menu-list"
-        class="menu-list"
-      ></ul>
-
-    </nav>
-
   </aside>
 
 
-  <!-- ============================= -->
   <!-- OVERLAY MOBILE -->
-  <!-- ============================= -->
-
   <div
     id="sidebar-overlay"
     class="sidebar-overlay"
   ></div>
 
 
-  <!-- ============================= -->
   <!-- NỘI DUNG CHÍNH -->
-  <!-- ============================= -->
-
   <main class="main-content">
 
     <header class="content-header">
 
+      <p class="welcome-label">
+        HỆ THỐNG QUẢN LÝ KHÁCH HÀNG
+      </p>
+
       <h1>
-        Menu theo quyền người dùng
+        Xin chào!
       </h1>
 
       <p>
-        Frontend tự động kiểm tra vai trò người dùng
-        để hiển thị menu tương ứng.
+        Chào mừng bạn quay trở lại hệ thống quản lý khách hàng.
       </p>
 
     </header>
 
 
-    <!-- ============================= -->
-    <!-- KHU VỰC TEST PHÂN QUYỀN -->
-    <!-- ============================= -->
+    <!-- DASHBOARD -->
+    <section class="dashboard-content">
 
-    <section class="demo-box">
+      <div class="welcome-card">
 
-      <h3>
-        Kiểm tra phân quyền hiển thị Menu:
-      </h3>
+        <div class="welcome-card-content">
 
+          <h2>Trang chủ</h2>
 
-      <div class="button-group">
+          <p>
+            Sử dụng menu bên trái để truy cập các chức năng
+            được cấp quyền cho tài khoản của bạn.
+          </p>
 
-        <button
-          id="btn-set-admin"
-          class="btn btn-admin"
-          type="button"
-        >
-          Đổi vai trò thành ADMIN
-        </button>
-
-
-        <button
-          id="btn-set-user"
-          class="btn btn-user"
-          type="button"
-        >
-          Đổi vai trò thành USER
-        </button>
+        </div>
 
       </div>
 
 
-      <!-- ============================= -->
-      <!-- GHI CHÚ PHÂN QUYỀN -->
-<!-- ============================= -->
+      <!-- THÔNG TIN TÀI KHOẢN -->
+      <div class="dashboard-grid">
 
-      <div class="note-box">
+        <div class="dashboard-card">
 
-        <p>
-          <strong>Admin:</strong>
-          Xem được
-          <em>
-            Trang chủ, Thông tin cá nhân,
-            Quản lý người dùng, Quản lý tài khoản
-          </em>.
-        </p>
+          <span class="card-label">
+            Vai trò tài khoản
+          </span>
 
-        <p>
-          <strong>User:</strong>
-          Chỉ xem được
-          <em>
-            Trang chủ, Thông tin cá nhân
-          </em>.
-        </p>
+          <strong
+            id="dashboard-role"
+            class="card-value"
+          >
+            USER
+          </strong>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <span class="card-label">
+            Trạng thái
+          </span>
+
+          <strong class="card-value status-active">
+            Đang hoạt động
+          </strong>
+
+        </div>
 
       </div>
 
@@ -185,12 +169,24 @@
   </main>
 
 
-  <!-- ============================= -->
   <!-- JAVASCRIPT -->
-  <!-- ============================= -->
+  <script src="../js/menu.js?v=3"></script>
 
-  <!-- ?v=2 để trình duyệt tải menu.js mới -->
-  <script src="../js/menu.js?v=2"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const role =
+        (localStorage.getItem("userRole") || "USER").toUpperCase();
+
+      const dashboardRole =
+        document.getElementById("dashboard-role");
+
+      if (dashboardRole) {
+        dashboardRole.textContent = role;
+      }
+
+    });
+  </script>
 
 </body>
 

@@ -1,174 +1,657 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Trang chủ - Quản Lý Khách Hàng</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f6fa;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
         .header {
-            height: 60px;
+            height: 72px;
             background: #ffffff;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e5e9f0;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
+
+            padding: 0 45px;
         }
 
         .logo {
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 700;
+            color: #172033;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
+        }
+
+        .user-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #30394b;
+        }
+
+        .role-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            background: #e8f1ff;
+            color: #2463c5;
+
+            text-transform: uppercase;
         }
 
         .logout-btn {
-            padding: 8px 15px;
+            margin-left: 6px;
+
+            padding: 10px 18px;
+
             border: none;
-            border-radius: 5px;
-            background: #dc3545;
+            border-radius: 8px;
+
+            background: #e63946;
             color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
             cursor: pointer;
+
+            transition: 0.2s;
         }
+
+        .logout-btn:hover {
+            background: #cc2936;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
 
         .container {
-            padding: 40px;
+            width: min(1180px, calc(100% - 60px));
+            margin: 0 auto;
+
+            padding: 45px 0;
         }
 
+        /* =========================
+           WELCOME
+        ========================= */
+
         .welcome {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 25px;
+            position: relative;
+
+            padding: 38px 40px;
+            margin-bottom: 30px;
+
+            border-radius: 16px;
+
+            background: #ffffff;
+
+            border: 1px solid #e9edf3;
+
+            box-shadow:
+                0 5px 20px rgba(31, 45, 61, 0.06);
         }
+
+        .welcome-small {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            color: #3478e5;
+
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .welcome h1 {
+            margin-bottom: 10px;
+
+            font-size: 32px;
+            color: #172033;
+        }
+
+        .welcome p {
+            color: #697386;
+
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        #welcomeUser {
+            margin-top: 6px;
+
+            color: #30394b;
+            font-weight: 600;
+        }
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        .section-header {
+            margin-bottom: 18px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 6px;
+
+            font-size: 21px;
+        }
+
+        .section-header p {
+            color: #7a8496;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 22px;
         }
 
         .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+
+            min-height: 175px;
+
+            padding: 28px;
+
+            background: #ffffff;
+
+            border-radius: 14px;
+            border: 1px solid #e9edf3;
+
+            box-shadow:
+                0 4px 16px rgba(31, 45, 61, 0.06);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            border-color: #cfdcf1;
+
+            box-shadow:
+                0 10px 25px rgba(31, 45, 61, 0.10);
+        }
+
+        .card-icon {
+            width: 46px;
+            height: 46px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #edf4ff;
+            color: #3478e5;
+
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .card h3 {
-            margin-top: 0;
+            margin-bottom: 8px;
+
+            font-size: 18px;
+            color: #172033;
         }
 
-        @media (max-width: 768px) {
+        .card p {
+            color: #737e90;
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .card-link {
+            display: inline-block;
+
+            margin-top: 16px;
+
+            color: #3478e5;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            margin-top: 50px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e1e6ed;
+
+            text-align: center;
+
+            color: #9aa3b1;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
             .cards {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .header {
+                height: auto;
+
+                padding: 18px 20px;
+
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .user-info {
+                gap: 8px;
+            }
+
+            .user-name {
+                display: none;
             }
 
             .container {
-                padding: 20px;
+                width: calc(100% - 30px);
+                padding: 25px 0;
+            }
+
+            .welcome {
+                padding: 28px 24px;
+            }
+
+            .welcome h1 {
+                font-size: 27px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
+
 <body>
 
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <header class="header">
+
         <div class="logo">
             Quản Lý Khách Hàng
         </div>
 
         <div class="user-info">
-            <span id="userName">Người dùng</span>
-            <span id="userRole">-</span>
-            <button id="logoutBtn" class="logout-btn">
+
+            <span
+                id="userName"
+                class="user-name"
+            >
+                Người dùng
+            </span>
+
+            <span
+                id="userRole"
+                class="role-badge"
+            >
+                -
+            </span>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+                type="button"
+            >
                 Đăng xuất
             </button>
+
         </div>
+
     </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
 
     <main class="container">
 
+        <!-- CHÀO MỪNG -->
+
         <section class="welcome">
-            <h1>Trang chủ</h1>
+
+            <span class="welcome-small">
+                Hệ thống quản lý khách hàng
+            </span>
+
+            <h1>
+                Trang chủ
+            </h1>
 
             <p>
-                Chào mừng bạn đến với hệ thống quản lý khách hàng.
+                Chào mừng bạn quay trở lại hệ thống.
+                Quản lý thông tin và các chức năng của bạn
+                tại đây.
             </p>
 
             <p id="welcomeUser"></p>
-        </section>
-
-        <section class="cards">
-
-            <div class="card">
-                <h3>Khách hàng</h3>
-                <p>Quản lý thông tin khách hàng.</p>
-            </div>
-
-            <div class="card">
-                <h3>Tài khoản</h3>
-                <p>Quản lý tài khoản người dùng.</p>
-            </div>
-
-            <div class="card">
-                <h3>Phân quyền</h3>
-                <p>Quản lý vai trò và nhóm nghiệp vụ.</p>
-            </div>
 
         </section>
+
+
+        <!-- CHỨC NĂNG -->
+
+        <div class="section-header">
+
+            <h2>Chức năng</h2>
+
+            <p>
+                Các chức năng được cấp quyền cho tài khoản của bạn.
+            </p>
+
+        </div>
+
+
+        <section
+            id="functionCards"
+            class="cards"
+        >
+
+            <!-- KHÁCH HÀNG -->
+
+            <div
+                class="card"
+                id="customerCard"
+            >
+
+                <div class="card-icon">
+                    KH
+                </div>
+
+                <h3>
+                    Khách hàng
+                </h3>
+
+                <p>
+                    Quản lý và theo dõi thông tin
+                    khách hàng trong hệ thống.
+                </p>
+
+                <span class="card-link">
+                    Truy cập 
+                </span>
+
+            </div>
+
+
+            <!-- TÀI KHOẢN -->
+
+            <div
+                class="card admin-only"
+                id="accountCard"
+            >
+
+                <div class="card-icon">
+                    TK
+                </div>
+
+                <h3>
+                    Tài khoản
+                </h3>
+
+                <p>
+                    Quản lý tài khoản và thông tin
+                    người dùng trong hệ thống.
+                </p>
+
+                <span class="card-link">
+                    Truy cập 
+                </span>
+
+            </div>
+
+
+            <!-- PHÂN QUYỀN -->
+
+            <div
+                class="card admin-only"
+                id="permissionCard"
+            >
+
+                <div class="card-icon">
+                    PQ
+                </div>
+
+                <h3>
+                    Phân quyền
+                </h3>
+
+                <p>
+                    Quản lý vai trò và nhóm nghiệp vụ
+                    của người dùng.
+                </p>
+
+                <span class="card-link">
+                    Truy cập 
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            Hệ thống quản lý khách hàng
+        </footer>
 
     </main>
 
+
     <script>
-        // Lấy thông tin người dùng sau khi đăng nhập
-        const currentUser = localStorage.getItem("currentUser");
+
+        // =====================================
+        // KIỂM TRA ĐĂNG NHẬP
+        // =====================================
+
+        const currentUser =
+            localStorage.getItem("currentUser");
 
         if (!currentUser) {
-            window.location.href = "../index.html";
+
+            window.location.href =
+                "../index.html";
+
         } else {
-            const user = JSON.parse(currentUser);
 
-            document.getElementById("userName").textContent =
-                user.fullName || user.email;
+            const user =
+                JSON.parse(currentUser);
 
-            document.getElementById("userRole").textContent =
-                user.role || "";
+            const role =
+                (user.role || "user")
+                    .toLowerCase();
 
-            document.getElementById("welcomeUser").textContent =
-                "Xin chào " + (user.fullName || user.email) + "!";
-        }
 
-        // Đăng xuất
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
-            try {
-                await fetch("http://localhost:8080/api/sessions/logout", {
-                    method: "POST",
-                    credentials: "include"
-                });
-            } catch (error) {
-                console.error("Logout error:", error);
+            // ================================
+            // HIỂN THỊ THÔNG TIN USER
+            // ================================
+
+            document.getElementById(
+                "userName"
+            ).textContent =
+                user.fullName ||
+                user.email;
+
+
+            document.getElementById(
+                "userRole"
+            ).textContent =
+                role;
+
+
+            document.getElementById(
+                "welcomeUser"
+            ).textContent =
+                "Xin chào " +
+                (user.fullName || user.email) +
+                "!";
+
+
+            // ================================
+            // PHÂN QUYỀN GIAO DIỆN
+            // ================================
+
+            if (role !== "admin") {
+
+                document
+                    .querySelectorAll(".admin-only")
+                    .forEach(element => {
+
+                        element.style.display =
+                            "none";
+
+                    });
+
             }
 
-            localStorage.removeItem("currentUser");
+        }
 
-            window.location.href = "../index.html";
-        });
+
+        // =====================================
+        // ĐĂNG XUẤT
+        // =====================================
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    const token =
+                        localStorage.getItem(
+                            "sessionToken"
+                        );
+
+                    try {
+
+                        await fetch(
+                            "http://localhost:8080/api/sessions/logout",
+                            {
+                                method: "POST",
+
+                                headers: token
+                                    ? {
+                                        "Authorization":
+                                            "Bearer " + token
+                                    }
+                                    : {},
+
+                                credentials:
+                                    "include"
+                            }
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "Logout error:",
+                            error
+                        );
+
+                    }
+
+
+                    // XÓA THÔNG TIN ĐĂNG NHẬP
+
+                    localStorage.removeItem(
+                        "currentUser"
+                    );
+
+                    localStorage.removeItem(
+                        "userRole"
+                    );
+
+                    localStorage.removeItem(
+                        "sessionToken"
+                    );
+
+
+                    window.location.href =
+                        "../index.html";
+
+                }
+            );
+
     </script>
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,11 +12,15 @@
 
 <body>
 
-  <!-- Nút mở Sidebar trên mobile -->
+  <!-- ============================= -->
+  <!-- NÚT MỞ SIDEBAR MOBILE -->
+  <!-- ============================= -->
+
   <button
     id="sidebar-toggle"
     class="sidebar-toggle"
     aria-label="Toggle menu"
+    type="button"
   >
     <span></span>
     <span></span>
@@ -23,10 +28,13 @@
   </button>
 
 
-  <!-- Sidebar -->
+  <!-- ============================= -->
+  <!-- SIDEBAR -->
+  <!-- ============================= -->
+
   <aside id="app-sidebar" class="sidebar">
 
-    <!-- Header Sidebar -->
+    <!-- HEADER -->
     <div class="sidebar-header">
 
       <div class="brand-logo">
@@ -37,6 +45,7 @@
         id="sidebar-close"
         class="sidebar-close"
         aria-label="Close menu"
+        type="button"
       >
         &times;
       </button>
@@ -44,7 +53,10 @@
     </div>
 
 
-    <!-- Thông tin người dùng -->
+    <!-- ============================= -->
+    <!-- THÔNG TIN NGƯỜI DÙNG -->
+    <!-- ============================= -->
+
     <div class="user-profile-badge">
 
       <span class="user-role-label">
@@ -52,7 +64,7 @@
         <strong id="current-role-display">USER</strong>
       </span>
 
-      <!-- Nút đăng xuất -->
+      <!-- NÚT ĐĂNG XUẤT -->
       <button
         id="btn-logout"
         class="btn-logout"
@@ -64,7 +76,10 @@
     </div>
 
 
-    <!-- Menu -->
+    <!-- ============================= -->
+    <!-- MENU -->
+    <!-- ============================= -->
+
     <nav class="sidebar-nav">
 
       <ul
@@ -77,14 +92,20 @@
   </aside>
 
 
-  <!-- Overlay trên mobile -->
+  <!-- ============================= -->
+  <!-- OVERLAY MOBILE -->
+  <!-- ============================= -->
+
   <div
     id="sidebar-overlay"
     class="sidebar-overlay"
   ></div>
 
 
-  <!-- Nội dung chính -->
+  <!-- ============================= -->
+  <!-- NỘI DUNG CHÍNH -->
+  <!-- ============================= -->
+
   <main class="main-content">
 
     <header class="content-header">
@@ -101,7 +122,10 @@
     </header>
 
 
-    <!-- Khu vực kiểm tra phân quyền -->
+    <!-- ============================= -->
+    <!-- KHU VỰC TEST PHÂN QUYỀN -->
+    <!-- ============================= -->
+
     <section class="demo-box">
 
       <h3>
@@ -131,7 +155,10 @@
       </div>
 
 
-      <!-- Ghi chú -->
+      <!-- ============================= -->
+      <!-- GHI CHÚ PHÂN QUYỀN -->
+<!-- ============================= -->
+
       <div class="note-box">
 
         <p>
@@ -158,8 +185,13 @@
   </main>
 
 
-  <!-- JavaScript -->
- <script src="../js/menu.js?v=2"></script>
+  <!-- ============================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================= -->
+
+  <!-- ?v=2 để trình duyệt tải menu.js mới -->
+  <script src="../js/menu.js?v=2"></script>
 
 </body>
+
 </html>

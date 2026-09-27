@@ -1,22 +1,27 @@
 const MENU_ITEMS = [
   {
     title: "Trang chủ",
-    url: "/home",
+    url: "../pages/dashboard.html",
     roles: ["USER", "ADMIN"]
   },
   {
     title: "Thông tin cá nhân",
-    url: "/profile",
+    url: "../pages/users/user-detail.html",
+    roles: ["USER", "ADMIN"]
+  },
+  {
+    title: "Đổi mật khẩu",
+    url: "../pages/change-password.html",
     roles: ["USER", "ADMIN"]
   },
   {
     title: "Quản lý người dùng",
-    url: "/admin/users",
+    url: "../pages/users/user-list.html",
     roles: ["ADMIN"]
   },
   {
     title: "Quản lý tài khoản",
-    url: "/admin/accounts",
+    url: "../pages/users/account-lock.html",
     roles: ["ADMIN"]
   }
 ];
@@ -84,6 +89,9 @@ function handleMenuClick(event, url) {
   event.preventDefault();
 
   console.log("Menu được chọn:", url);
+
+  // Chuyển sang trang tương ứng
+  window.location.href = url;
 }
 
 

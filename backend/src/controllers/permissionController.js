@@ -6,24 +6,23 @@ const permissionService = require('../services/permissionService');
  */
 const getMyPermissions = async (req, res) => {
   try {
-    const userId =
-      req.user?._id ||
-      req.user?.id ||
-      req.headers['x-user-id'];
+    const userId = req.user?._id || req.user?.id;
 
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'Chưa xác định được người dùng',
+        message: 'Bạn chưa đăng nhập',
       });
     }
 
-    const permission = await permissionService.getUserPermission(userId);
+    const permission =
+      await permissionService.getUserPermission(userId);
 
     return res.status(200).json({
       success: true,
       data: permission,
     });
+
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -31,6 +30,7 @@ const getMyPermissions = async (req, res) => {
     });
   }
 };
+
 
 /**
  * Lấy phạm vi dữ liệu của User
@@ -38,24 +38,23 @@ const getMyPermissions = async (req, res) => {
  */
 const getMyDataScope = async (req, res) => {
   try {
-    const userId =
-      req.user?._id ||
-      req.user?.id ||
-      req.headers['x-user-id'];
+    const userId = req.user?._id || req.user?.id;
 
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'Chưa xác định được người dùng',
+        message: 'Bạn chưa đăng nhập',
       });
     }
 
-    const scope = await permissionService.getDataScope(userId);
+    const scope =
+      await permissionService.getDataScope(userId);
 
     return res.status(200).json({
       success: true,
       data: scope,
     });
+
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -64,23 +63,21 @@ const getMyDataScope = async (req, res) => {
   }
 };
 
+
 /**
  * Kiểm tra một quyền cụ thể
  * POST /api/permissions/check
  */
 const checkPermission = async (req, res) => {
   try {
-    const userId =
-      req.user?._id ||
-      req.user?.id ||
-      req.headers['x-user-id'];
+    const userId = req.user?._id || req.user?.id;
 
     const { permission } = req.body;
 
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'Chưa xác định được người dùng',
+        message: 'Bạn chưa đăng nhập',
       });
     }
 
@@ -91,10 +88,11 @@ const checkPermission = async (req, res) => {
       });
     }
 
-    const allowed = await permissionService.hasPermission(
-      userId,
-      permission
-    );
+    const allowed =
+      await permissionService.hasPermission(
+        userId,
+        permission
+      );
 
     if (!allowed) {
       return res.status(403).json({
@@ -110,6 +108,7 @@ const checkPermission = async (req, res) => {
       allowed: true,
       message: 'Có quyền thực hiện',
     });
+
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -117,6 +116,7 @@ const checkPermission = async (req, res) => {
     });
   }
 };
+
 
 module.exports = {
   getMyPermissions,

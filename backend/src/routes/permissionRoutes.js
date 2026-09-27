@@ -3,15 +3,21 @@ const express = require('express');
 const router = express.Router();
 
 const permissionController = require('../controllers/permissionController');
+const authMiddleware = require('../middleware/authMiddleware');
 const permissionMiddleware = require('../middleware/permissionMiddleware');
 
-// Lấy thông tin quyền của User
+// ========================================
+// TẤT CẢ API PERMISSION PHẢI ĐĂNG NHẬP
+// ========================================
+router.use(authMiddleware);
+
+// Lấy quyền của chính User đang đăng nhập
 router.get(
   '/me',
   permissionController.getMyPermissions
 );
 
-// Lấy phạm vi dữ liệu của User
+// Lấy phạm vi dữ liệu của chính User đang đăng nhập
 router.get(
   '/scope',
   permissionController.getMyDataScope
@@ -23,7 +29,7 @@ router.post(
   permissionController.checkPermission
 );
 
-// API test Middleware phân quyền
+// API test middleware phân quyền
 router.get(
   '/test/user-view',
   permissionMiddleware('USER_VIEW'),
